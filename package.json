@@ -1,0 +1,21 @@
+{
+  "name": "me1-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon .",
+    "start": "node ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^7.4.3",
+    "express": "^4.17.1",
+    "typeorm": "^0.2.38"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
