@@ -29,6 +29,7 @@
 - express
 - typeorm
 - better-sqlite3
+- sqlite3
 
 Dev Dependencies
 - nodemon
