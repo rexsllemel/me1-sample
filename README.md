@@ -40,3 +40,7 @@ Dev Dependencies
  Installing Dev Dependencies
 
  `npm install -D nodemon`
+ 
+ 
+ #Notes
+ This for Major Elective 1 activity
