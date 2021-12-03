@@ -44,4 +44,4 @@ Dev Dependencies
  
  #Notes
  
- This for Major Elective 1 activity
+ This is for Major Elective 1 activity
