@@ -46,4 +46,4 @@ Dev Dependencies
  
  This is for Major Elective 1 school activity.
  
- Forked from my instructor, Sir James Pandan
+ Forked from my instructor, Sir James Pandan.
