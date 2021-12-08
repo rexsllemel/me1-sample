@@ -1,20 +1,17 @@
+const express = require('express') //<== to import express framework in node.js
+const typeorm = require('typeorm') //<== to use typeorm for databe
 
-const express = require('express')
-const typeorm = require('typeorm')
+const app = express() //<== to use express framework
+app.use(express.json()) //<== to handle  node.js and read type JSON format
 
-const app = express()
-app.use(express.json())
-
-
+//create connection to sqlite database
 typeorm.createConnection({
-    type: "sqlite",
-    database: "./database/database.db",
-    port: 5432,
-    username: 'postgres',
-    password: '123456',
-    synchronize: true,
+    type: "sqlite", //Our database server to be use
+    database: "./database/database.db", //database location
+    synchronize: true, //to automatically synchronize our database
     entities: [
-        require('./entities/User')
+        require('./entities/User'), //User.js location
+        require('./entities/todo'), //todo.js location
     ]
 })
 
@@ -22,22 +19,25 @@ typeorm.createConnection({
 app.get('/', (req, res) => {
     res.send('Hello World')
 });
+//This is to register your information to the database
 app.post('/register', async (req, res) => {
 
     let repo = typeorm.getRepository('Users')
     repo.save({
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        birthdate: req.body.birthdate
     })
-    res.send('Registration Complete')
+    res.send('Registration Complete!')
 });
-
-
+//TO show all users in database
 app.get('/users', async (req, res) => {
     let repo = await typeorm.getRepository('Users')
     res.send(await repo.find())
 });
-
+//This is to login to the registered user in the database
 app.post('/login', async (req, res) => {
     let repo = typeorm.getRepository('Users')
 
@@ -52,9 +52,45 @@ app.post('/login', async (req, res) => {
     else{
         res.send(x)
     }
-})
+});
+
+//To register model to database
+app.post('/todo', async (req, res) => {
+
+    let repo = typeorm.getRepository('model')
+    let todos = await repo.save({
+        date_created: req.body.date_created,
+        date_end: req.body.date_end,
+        description: req.body.description,
+        user_id: req.body.user_id
+    })
+    res.send(todos)
+});
+
+//THis is to show what are registered model from database
+app.get('/todo', async (req, res) => {
+    let repo = await typeorm.getRepository('model')
+    res.send(await repo.find())
+});
+
+//This is to delete based from date created and description
+app.delete('/todo', async (req, res) => {
+    let repo = typeorm.getRepository('model')
+
+    let toDelete = await repo.delete({
+        date_created: req.body.date_created,
+        description: req.body.description
+    })
+
+    if (toDelete === undefined){
+        res.send('Model/s may not be registered!')
+    }
+    else{
+        res.send('Model/s successfully deleted!')
+    }
+});
 
 
 app.listen(9000, ()=>{
     console.log('The server is running')
-})
+});
