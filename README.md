@@ -4,7 +4,7 @@
 
         Run This command in the terminal
         \
-        `git clone https://github.com/jamesp101/me1-sample`
+        `git clone https://github.com/rexsllemel/me1-sample-Melgar`
     - To download;
         - Click 'Code' 
         - Click 'Download Zip'
